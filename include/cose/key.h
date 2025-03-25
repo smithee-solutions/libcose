@@ -49,6 +49,9 @@ typedef struct cose_key {
     uint8_t *x;         /**< Public key part 1, must match the expected size of the algorithm */
     uint8_t *y;         /**< Public key part 2, when not NULL, must match the expected size of the algorithm */
     uint8_t *d;         /**< Private or secret key, must match the expected size of the algorithm */
+
+    unit8_t *n;         /**< RSA modulus n per RFC 8230 Table 4 */
+    unit8_t *e;         /**< RSA public exponent e per RFC 8230 Table 4 */
 } cose_key_t;
 /** @} */
 

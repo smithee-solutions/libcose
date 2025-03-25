@@ -149,10 +149,11 @@ typedef enum {
 } cose_curve_t;
 
 /**
- * @brief COSE signature algorithm numbers
+ * @brief COSE (signature and other) signature algorithm numbers
  */
 typedef enum {
     COSE_ALGO_NONE  = 0,                /**< Invalid algo */
+    COSE_ALGO_RSAES_OEAP_SHA256 = -41,  /**< RSAES-OAEP w/SHA-256 */
     COSE_ALGO_HSSLMS = -46,             /**< HSS-LMS signature algo */
     COSE_ALGO_ES512 = -36,              /**< ECDSA w/ SHA512 */
     COSE_ALGO_ES384 = -35,              /**< ECDSA w/ SHA384 */

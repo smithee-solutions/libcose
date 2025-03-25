@@ -199,19 +199,26 @@ int cose_encrypt_add_recipient(cose_encrypt_t *encrypt, const cose_key_t *key)
 
 COSE_ssize_t cose_encrypt_encode(cose_encrypt_t *encrypt, uint8_t *buf, size_t len, const uint8_t *nonce, uint8_t **out)
 {
-    /* The buffer here is used to contain dummy data a number of times */
-    uint8_t *bufptr = buf;
-    encrypt->flags |= COSE_FLAGS_ENCODE;
 
-    /* Generate intermediate key
-     * or get it from the first recipient if it is direct */
-    if (encrypt->algo == COSE_ALGO_DIRECT) {
-       encrypt->cek = encrypt->recps[0].key->d;
+    if (encrypt->algo == COSE_ALGO_RSAES_OAEP_SHA256)
+    {
     }
     else {
-        /* Generate intermediate key */
-        encrypt->cek = buf;
-        buf += cose_crypto_keygen(buf, len, encrypt->algo);
+   
+      /* The buffer here is used to contain dummy data a number of times */
+      uint8_t *bufptr = buf;
+      encrypt->flags |= COSE_FLAGS_ENCODE;
+
+      /* Generate intermediate key
+       * or get it from the first recipient if it is direct */
+      if (encrypt->algo == COSE_ALGO_DIRECT) {
+         encrypt->cek = encrypt->recps[0].key->d;
+      }
+      else {
+          /* Generate intermediate key */
+          encrypt->cek = buf;
+          buf += cose_crypto_keygen(buf, len, encrypt->algo);
+      }
     }
 
     /* Build ciphertext */

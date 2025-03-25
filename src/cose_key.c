@@ -18,6 +18,14 @@ void cose_key_init(cose_key_t *key)
     memset(key, 0, sizeof(cose_key_t));
 }
 
+void cose_key_set_keys_rsa(cose_key_t *key, cose_algo_t algo, uint8_t *n, uint8_t *e)
+{
+    key->kty = COSE_KTY_RSA;
+    key->algo = algo;
+    key->n = n;
+    key->e = e;
+}
+
 void cose_key_set_keys(cose_key_t *key, cose_curve_t curve, cose_algo_t algo,
                           uint8_t *x, uint8_t *y, uint8_t *d)
 {
